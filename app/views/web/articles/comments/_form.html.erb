@@ -1,0 +1,13 @@
+<%= form_with(model: [@article, @article.comments.build], url: article_comments_path(@article), scope: :comment) do |form| %>
+  <p>
+    <%= form.label :commentor %><br>
+    <%= form.text_field :commentor, id: :comment_commentor %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body, id: :comment_body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
