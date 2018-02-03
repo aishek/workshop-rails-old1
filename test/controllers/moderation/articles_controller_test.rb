@@ -16,19 +16,21 @@ class Moderation::ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update' do
+    article = articles(:moderation)
     category = article_categories(:one)
 
-    new_params = {
-      'state' => 'published',
-      'category_id' => category.id
-    }
-    patch moderation_article_url(@article), params: { article: new_params }
+    put moderation_article_url(article),
+        params: {
+          moderate_article: {
+            state_event: 'publish',
+            category_id: category.id
+          }
+        }
     assert_response :redirect
     follow_redirect!
     assert_response :success
 
-    @article.reload
-
-    assert { @article.attributes.slice('state', 'category_id') == new_params }
+    assert { article.reload.category == category }
+    assert { article.published? }
   end
 end

@@ -3,3 +3,9 @@
 one:
   title: title1
   text: text1
+  state: draft
+
+moderation:
+  title: title2
+  text: text2
+  state: moderation
