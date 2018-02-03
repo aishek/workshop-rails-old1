@@ -22,7 +22,7 @@ class CommentFlowTest < ActionDispatch::IntegrationTest
 
   test "comment destroying" do
     article = articles(:one)
-    comment = comments(:one)
+    comment = article_comments(:one)
 
     delete article_comment_path(article, comment), headers: auth_headers
     assert_response :redirect
