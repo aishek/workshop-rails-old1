@@ -1,29 +1,5 @@
-= form_with model: @article, local: true, url: moderation_article_path(@article) do |form|
+= simple_form_for @moderate_article_form, url: moderation_article_path(@article) do |form|
+  = form.input :state_event, as: :state_event
+  = form.input :category_id, collection: Article::Category.all.collect { |p| [ p.title, p.id ] }
 
-  - if @article.errors.any?
-    #error_explanation
-      h2 #{pluralize(@article.errors.count, "error")} prohibited this article from being saved:
-      ul
-        - @article.errors.full_messages.each do |msg|
-          li = msg
-
-  p
-    label
-      => form.radio_button :state, :moderation
-      | moderation
-  p
-    label
-      => form.radio_button :state, :draft
-      | draft
-  p
-    label
-      => form.radio_button :state, :published
-      | published
-
-
-  p
-    = form.label :category_id
-    br
-    = form.select :category_id, Article::Category.all.collect { |p| [ p.title, p.id ] }, include_blank: true
-
-  p = form.submit
+  = form.button :submit

@@ -6,6 +6,11 @@ p
   strong Text:
   = @article.text
 
+h2 Links
+ul
+  - @article.links.each do |link|
+    li = link_to link.url
+
 h2 Comments
 = render @article.comments
 

@@ -34,6 +34,10 @@ gem 'state_machines-activerecord'
 gem 'ransack'
 gem 'minitest-power_assert'
 gem 'slim-rails'
+gem 'simple_form'
+gem 'reform-rails'
+gem 'jquery-rails'
+gem 'cocoon'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -9,11 +9,16 @@ module Moderation
 
     def edit
       @article = Article.find params[:id]
+      @moderate_article_form = ModerateArticleForm.new(@article)
     end
 
     def update
       @article = Article.find params[:id]
-      if @article.update(article_params)
+      @moderate_article_form = ModerateArticleForm.new(@article)
+
+      if @moderate_article_form.validate(article_params)
+        @moderate_article_form.save
+
         redirect_to moderation_articles_path
       else
         render 'edit'
@@ -22,7 +27,7 @@ module Moderation
 
     private
     def article_params
-      params.require(:article).permit(:state, :category_id)
+      params.require(:moderate_article).permit(:state_event, :category_id)
     end
   end
 end

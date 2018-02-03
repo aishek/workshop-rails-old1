@@ -1,6 +1,5 @@
 module Web
   class ArticlesController < Articles::ApplicationController
-
     authenticate! except: [:index, :show]
 
     def index
@@ -12,17 +11,18 @@ module Web
     end
 
     def new
-      @article = Article.new
+      @article = ArticleForm.new(Article.new)
     end
 
     def edit
-      @article = Article.find(params[:id])
+      @article = ArticleForm.new(Article.find(params[:id]))
     end
 
     def create
-      @article = Article.new(article_params)
+      @article = ArticleForm.new(Article.new)
 
-      if @article.save
+      if @article.validate(article_params)
+        @article.save
         redirect_to @article
       else
         render 'new'
@@ -30,9 +30,10 @@ module Web
     end
 
     def update
-      @article = Article.find(params[:id])
+      @article = ArticleForm.new(Article.find(params[:id]))
 
-      if @article.update(article_params)
+      if @article.validate(article_params)
+        @article.save
         redirect_to @article
       else
         render 'edit'
@@ -54,7 +55,7 @@ module Web
 
     private
     def article_params
-      params.require(:article).permit(:title, :text)
+      params.require(:article).permit(:title, :text, links_attributes: [:id, :url, :_destroy])
     end
   end
 end

@@ -1,11 +1,8 @@
 class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
-  belongs_to :category, required: false
+  has_many :links, dependent: :destroy, inverse_of: :article
 
-  validates :title, presence: true,
-                    length: { minimum: 5 }
-  validates :category, presence: true,
-                       if: :published?
+  belongs_to :category, required: false
 
   state_machine :state, initial: :draft do
     state :draft
@@ -14,6 +11,14 @@ class Article < ApplicationRecord
 
     event :moderate do
       transition draft: :moderation
+    end
+
+    event :publish do
+      transition moderation: :published
+    end
+
+    event :draft do
+      transition moderation: :draft
     end
   end
 end
