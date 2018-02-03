@@ -13,6 +13,7 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     article = Article.find_by title: "can create", text: "article successfully."
+    assert article.draft?
     assert article.present?
   end
 
