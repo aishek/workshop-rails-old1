@@ -1,4 +1,4 @@
-= simple_form_for @moderate_article_form, url: moderation_article_path(@article) do |form|
+= simple_form_for @article, url: moderation_article_path(@article) do |form|
   = form.input :state_event, as: :state_event
   = form.input :category_id, collection: Article::Category.all.collect { |p| [ p.title, p.id ] }
 

@@ -8,16 +8,14 @@ module Moderation
     end
 
     def edit
-      @article = Article.find params[:id]
-      @moderate_article_form = ModerateArticleForm.new(@article)
+      @article = ModerateArticleForm.new(Article.find params[:id])
     end
 
     def update
-      @article = Article.find params[:id]
-      @moderate_article_form = ModerateArticleForm.new(@article)
+      @article = ModerateArticleForm.new(Article.find params[:id])
 
-      if @moderate_article_form.validate(article_params)
-        @moderate_article_form.save
+      if @article.validate(article_params)
+        @article.save
 
         redirect_to moderation_articles_path
       else
