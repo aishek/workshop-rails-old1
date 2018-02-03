@@ -1,0 +1,13 @@
+h1 Moderate article
+
+p
+  strong Title:
+  = @article.title
+
+p
+  strong Text:
+  = @article.text
+
+= render 'form'
+
+p = link_to 'Back', moderation_articles_path

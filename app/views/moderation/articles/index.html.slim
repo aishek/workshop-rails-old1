@@ -1,0 +1,18 @@
+= search_form_for @q, url: moderation_articles_url do |f|
+  = f.label :state_eq
+  = f.select :state_eq, ['draft', 'moderation', 'published']
+
+  = f.submit
+
+h1 Articles:
+table
+  tr
+    th Title
+    th Text
+    th = sort_link(@q, :created_at)
+
+  - @articles.each do |article|
+    tr
+      td = article.title
+      td = l article.created_at
+      td = link_to 'Moderate', edit_moderation_article_path(article)

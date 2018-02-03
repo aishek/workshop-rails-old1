@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'state_machines-activerecord'
 gem 'ransack'
 gem 'minitest-power_assert'
+gem 'slim-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
