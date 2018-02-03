@@ -13,8 +13,8 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     article = Article.find_by title: "can create", text: "article successfully."
-    assert article.draft?
-    assert article.present?
+    assert { article.draft? }
+    assert { article.present? }
   end
 
   test "article updating" do
@@ -32,8 +32,8 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     updated_article = Article.find_by id: article.id
-    assert(updated_article.title == "#{article.title} new")
-    assert(updated_article.text == "#{article.text} new")
+    assert { updated_article.title == "#{article.title} new" }
+    assert { updated_article.text == "#{article.text} new" }
   end
 
   test "article destroying" do
@@ -45,6 +45,6 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     deleted_article = Article.find_by id: article.id
-    assert_not deleted_article.present?
+    assert { deleted_article.nil? }
   end
 end

@@ -17,7 +17,7 @@ class CommentFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     comment = article.comments.find_by commentor: 'stranger', body: 'wow'
-    assert comment.present?
+    assert { comment.present? }
   end
 
   test "comment destroying" do
@@ -30,6 +30,6 @@ class CommentFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     deleted_comment = article.comments.find_by id: comment.id
-    assert_not deleted_comment.present?
+    assert { deleted_comment.nil? }
   end
 end
