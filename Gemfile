@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'reform-rails'
 gem 'jquery-rails'
 gem 'cocoon'
+gem 'dry-transaction'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

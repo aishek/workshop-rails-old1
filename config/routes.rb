@@ -5,7 +5,11 @@ Rails.application.routes.draw do
         post :moderate
       end
       scope module: :articles do
-        resources :comments
+        resources :comments do
+          member do
+            post :like
+          end
+        end
       end
     end
 

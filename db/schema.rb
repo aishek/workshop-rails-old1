@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203111432) do
+ActiveRecord::Schema.define(version: 20180203173125) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "title", null: false
+  end
+
+  create_table "article_comment_likes", force: :cascade do |t|
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_article_comment_likes_on_comment_id"
   end
 
   create_table "article_links", force: :cascade do |t|
@@ -31,6 +38,7 @@ ActiveRecord::Schema.define(version: 20180203111432) do
     t.datetime "updated_at", null: false
     t.integer "category_id"
     t.string "state", default: "draft", null: false
+    t.integer "likes_count", default: 0, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -39,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180203111432) do
     t.integer "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0, null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
