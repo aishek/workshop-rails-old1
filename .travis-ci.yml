@@ -1,0 +1,5 @@
+dist: trusty
+language: ruby
+script:
+  - bundle exec rails db:setup RAILS_ENV=test
+  - bundle exec rails test test:system
