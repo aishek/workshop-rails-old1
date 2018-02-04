@@ -29,7 +29,6 @@ class CommentFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    deleted_comment = article.comments.find_by id: comment.id
-    assert { deleted_comment.nil? }
+    assert { !Article::Comment.exists?(comment.id) }
   end
 end

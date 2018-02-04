@@ -27,7 +27,9 @@ class Moderation::ArticlesControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    assert { article.reload.category == category }
+    article.reload
+
+    assert { article.category == category }
     assert { article.published? }
   end
 end

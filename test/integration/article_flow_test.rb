@@ -12,9 +12,9 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    article = Article.find_by title: "can create", text: "article successfully."
+    article = Article.find_by(title: "can create", text: "article successfully.")
+    assert { article }
     assert { article.draft? }
-    assert { article.present? }
   end
 
   test "article updating" do
@@ -44,7 +44,6 @@ class ArticleFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    deleted_article = Article.find_by id: article.id
-    assert { deleted_article.nil? }
+    assert { !Article.exists?(article.id) }
   end
 end
