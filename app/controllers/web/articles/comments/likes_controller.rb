@@ -3,7 +3,7 @@ module Web
     module Comments
       class LikesController < Web::Articles::Comments::ApplicationController
         def create
-          LikeMutator.create! resource_comment
+          Article::Comment::LikeMutator.create! resource_comment
 
           redirect_to article_path(resource_article)
         end
