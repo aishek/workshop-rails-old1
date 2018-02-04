@@ -12,7 +12,7 @@ table
     tr
       td = article.title
       td = article.text
-      td = article.likes_count
+      td = @article_likes_count[article.id]
       td = link_to 'Show', article_path(article)
       td = link_to 'Edit', edit_article_path(article)
       td = link_to 'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' }

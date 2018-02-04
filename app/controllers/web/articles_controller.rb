@@ -3,9 +3,8 @@ module Web
     authenticate! except: [:index, :show]
 
     def index
-      @articles = Article.left_outer_joins(:likes)
-                         .group('articles.id')
-                         .select('articles.*, COUNT(article_id) as likes_count')
+      @articles = Article.all
+      @article_likes_count = Article::Comment::Like.group(:article_id).count
     end
 
     def show
