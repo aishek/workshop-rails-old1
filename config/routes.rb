@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       end
       scope module: :articles do
         resources :comments do
-          member do
-            post :like
+          scope module: :comments do
+            resources :likes, only: [:create]
           end
         end
       end

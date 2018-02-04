@@ -1,17 +1,14 @@
 require 'test_helper'
 
 class Moderation::ArticlesControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @article = articles(:one)
-  end
-
   test 'should get index' do
     get moderation_articles_url
     assert_response :success
   end
 
   test 'should get edit' do
-    get edit_moderation_article_url(@article)
+    article = articles(:one)
+    get edit_moderation_article_url(article)
     assert_response :success
   end
 
@@ -21,7 +18,7 @@ class Moderation::ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     put moderation_article_url(article),
         params: {
-          moderate_article: {
+          article: {
             state_event: 'publish',
             category_id: category.id
           }

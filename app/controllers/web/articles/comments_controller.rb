@@ -1,24 +1,16 @@
 module Web
   module Articles
-    class CommentsController < ApplicationController
+    class CommentsController < Web::Articles::Comments::ApplicationController
       authenticate! only: :destroy
 
       def create
-        @comment = article.comments.create(comment_params)
-        redirect_to article_path(@article)
-      end
-
-      def like
-        comment = article.comments.find(params[:id])
-        LikeCommentService.new.call(comment: comment)
-
-        redirect_to article_path(article)
+        @comment = resource_article.comments.create(comment_params)
+        redirect_to article_path(resource_article)
       end
 
       def destroy
-        @comment = article.comments.find(params[:id])
-        @comment.destroy
-        redirect_to article_path(article)
+        resource_comment.destroy
+        redirect_to article_path(resource_article)
       end
 
       private

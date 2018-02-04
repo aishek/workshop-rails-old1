@@ -12,10 +12,11 @@ ul
     li = link_to link.url
 
 h2 Comments
-= render @article.comments
+= render partial: 'web/articles/comments/comment',
+         collection: @article.comments
 
 h2 Add a comment:
-= render 'comments/form'
+= render 'web/articles/comments/form'
 
 p
   => link_to 'Edit', edit_article_path(@article)

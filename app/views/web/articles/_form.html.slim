@@ -5,8 +5,12 @@
   h3 Links
   #links
     = f.simple_fields_for :links do |link|
-      = render 'links/link_fields', f: link
+      = render 'web/articles/links/link_fields', f: link
     .links
-      = link_to_add_association 'add link', f, :links, force_non_association_create: true, partial: 'links/link_fields'
+      = link_to_add_association 'add link',
+                                f,
+                                :links,
+                                force_non_association_create: true,
+                                partial: 'web/articles/links/link_fields'
 
   = f.button :submit

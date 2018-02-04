@@ -7,33 +7,31 @@ module Web
     end
 
     def show
-      @article = Article.find(params[:id])
+      @article = resource_article
     end
 
     def new
-      @article = ArticleForm.new(Article.new)
-    end
-
-    def edit
-      @article = ArticleForm.new(Article.find(params[:id]))
+      @article = ArticleType.new
     end
 
     def create
-      @article = ArticleForm.new(Article.new)
+      @article = ArticleType.new params.require(:article)
 
-      if @article.validate(article_params)
-        @article.save
+      if @article.save
         redirect_to @article
       else
         render 'new'
       end
     end
 
-    def update
-      @article = ArticleForm.new(Article.find(params[:id]))
+    def edit
+      @article = ArticleType.find params[:id]
+    end
 
-      if @article.validate(article_params)
-        @article.save
+    def update
+      @article = ArticleType.find params[:id]
+
+      if @article.update(params.require(:article))
         redirect_to @article
       else
         render 'edit'
@@ -41,21 +39,13 @@ module Web
     end
 
     def moderate
-      @article = Article.find(params[:id])
-      @article.moderate!
-      redirect_to @article
+      resource_article.moderate!
+      redirect_to resource_article
     end
 
     def destroy
-      @article = Article.find(params[:id])
-      @article.destroy
-
+      resource_article.destroy
       redirect_to articles_path
-    end
-
-    private
-    def article_params
-      params.require(:article).permit(:title, :text, links_attributes: [:id, :url, :_destroy])
     end
   end
 end

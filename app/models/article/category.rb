@@ -1,5 +1,3 @@
-class Article < ApplicationRecord
-  class Category < ApplicationRecord
-    has_many :articles
-  end
+class Article::Category < ApplicationRecord
+  has_many :articles
 end

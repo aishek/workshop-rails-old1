@@ -1,5 +1,3 @@
-class Article < ApplicationRecord
-  class Link < ApplicationRecord
-    belongs_to :article
-  end
+class Article::Link < ApplicationRecord
+  belongs_to :article
 end
