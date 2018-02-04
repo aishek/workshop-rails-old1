@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
-  has_many :likes, through: :comments, counter_cache: true
+  has_many :likes, class_name: 'Article::Comment::Like'
   has_many :links, dependent: :destroy, inverse_of: :article
 
   belongs_to :category, required: false
